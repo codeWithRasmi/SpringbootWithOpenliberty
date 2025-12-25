@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <platform>jakartaee-10.0</platform>
+        <feature>servlet</feature>
+        <feature>jdbc</feature>
+    </featureManager>
+    <basicRegistry id="basic" realm="BasicRealm">
+    </basicRegistry>
+    
+    <httpEndpoint id="defaultHttpEndpoint"
+                  httpPort="9080"
+                  httpsPort="9443" />
+                  
+    <applicationManager autoExpand="true"/>
+    <ssl id="defaultSSLConfig" trustDefaultCerts="true" />
+</server>
