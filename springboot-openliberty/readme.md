@@ -1,6 +1,7 @@
 # Getting Started
 
 ### Reference Documentation
+
 For further reference, please consider the following sections:
 
 * [Official Gradle documentation](https://docs.gradle.org)
@@ -12,13 +13,15 @@ For further reference, please consider the following sections:
 * [Spring Data JPA](https://docs.spring.io/spring-boot/4.0.0/reference/data/sql.html#data.sql.jpa-and-spring-data)
 
 ### Local Development Mode Guides
+
 The following guides illustrate how to run the application in Local Development Mode:
 
 * User gradle build to build and run the application
 * Modify server.xml inside src/deployment folder to configure the application server
 * Download and install Open Liberty from https://openliberty.io/downloads/
 * Create a server using the Liberty `server create <server-name>` command
-* We have created a task to copy the deployment files to the **dropins** folder. Update your openLiberty installation path, then run the following command:
+* We have created a task to copy the war and server.xml files to the respective folder. Please
+  update the variable '**libertyServerPath**' inside build.gradle, then run the following command:
   ```
   ./gradlew deployToLiberty
   ```

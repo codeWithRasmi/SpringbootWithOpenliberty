@@ -5,7 +5,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 // Define the Liberty dropins folder path
-def libertyDropins = "C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer\\dropins"
+def libertyServerPath = "C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer"
 def warFileName = "app.war"
 group = 'com.example'
 version = '1.0'
@@ -46,7 +46,7 @@ tasks.named('test') {
 }
 // Task to delete the old WAR if it exists
 tasks.register('cleanDropins', Delete) {
-    delete "${libertyDropins}/${warFileName}"
+    delete "${libertyServerPath}/dropins/${warFileName}"
 }
 
 tasks.register('deployToLiberty', Copy) {
@@ -55,7 +55,7 @@ tasks.register('deployToLiberty', Copy) {
     dependsOn tasks.named('copyServerXml')
     // 1. Copy and rename the WAR file to dropins
     from(tasks.named('bootWar'))
-    into 'C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer\\dropins'
+    into "${libertyServerPath}/dropins"
 
 }
 
@@ -63,7 +63,7 @@ tasks.register('copyServerXml', Copy) {
     // dependsOn tasks.named('deployToLiberty')
     // 2. Copy server.xml to the server configuration folder
     from('src/deployment/server.xml')
-    into 'C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer\\'
+    into "${libertyServerPath}"
 }
 
 // Ensure this runs automatically after build
