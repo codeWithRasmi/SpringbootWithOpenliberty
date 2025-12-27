@@ -50,10 +50,9 @@ tasks.register('cleanDropins', Delete) {
 }
 
 tasks.register('deployToLiberty', Copy) {
-    dependsOn tasks.named('cleanDropins')
-    // depend on bootWar to ensure it runs first
     dependsOn tasks.named('bootWar')
-
+    dependsOn tasks.named('cleanDropins')
+    dependsOn tasks.named('copyServerXml')
     // 1. Copy and rename the WAR file to dropins
     from(tasks.named('bootWar'))
     into 'C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer\\dropins'
@@ -61,13 +60,13 @@ tasks.register('deployToLiberty', Copy) {
 }
 
 tasks.register('copyServerXml', Copy) {
-    dependsOn tasks.named('deployToLiberty')
+    // dependsOn tasks.named('deployToLiberty')
     // 2. Copy server.xml to the server configuration folder
     from('src/deployment/server.xml')
     into 'C:\\Users\\rasmi\\IdeaProjects\\Server\\openliberty-jakartaee10-25.0.0.12\\wlp\\usr\\servers\\localServer\\'
 }
 
 // Ensure this runs automatically after build
-tasks.named('build') {
-    finalizedBy('cleanDropins', 'deployToLiberty', 'copyServerXml')
-}
+//tasks.named('build') {
+//    finalizedBy('cleanDropins', 'deployToLiberty', 'copyServerXml')
+//}
